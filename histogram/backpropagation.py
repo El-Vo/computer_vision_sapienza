@@ -24,4 +24,4 @@ thresh = cv2.merge((thresh,thresh,thresh))
 res = cv2.bitwise_and(target,thresh)
 
 res = np.vstack((target,thresh,res))
-cv2.imwrite('res.jpg',res)
+cv2.imwrite('res_backpropagation.jpg',res)
