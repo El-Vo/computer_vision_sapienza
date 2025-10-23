@@ -10,8 +10,9 @@ args = vars(ap.parse_args())
 image = cv2.imread(args["image"])
 
 # define the list of boundaries
+# [lower_b, lower_g, lower_r] and [upper_b, upper_g, upper_r]
 boundaries = [
-([17, 15, 100], [50, 56, 200]),
+([1, 15, 100], [255, 56, 200]),
 ([86, 31, 4], [220, 88, 50]),
 ([25, 146, 190], [62, 174, 250]),
 ([103, 86, 65], [145, 133, 128])
@@ -19,15 +20,13 @@ boundaries = [
 
 # loop over the boundaries
 for (lower, upper) in boundaries:
-# create NumPy arrays from the boundaries
-    lower = np.array(lower, dtype = "uint8")
-    upper = np.array(upper, dtype = "uint8")
-# find the colors within the specified boundaries and apply
-# the mask
-mask = cv2.inRange(image, lower, upper)
-output = cv2.bitwise_and(image, image, mask = mask)
-# show the images
-cv2.imshow("images", np.hstack([image, output]))
-cv2.waitKey(0) 
-
-# Tip: Try with rainbow image to find boundaries of color detection!
+ # create NumPy arrays from the boundaries
+ lower = np.array(lower, dtype = "uint8")
+ upper = np.array(upper, dtype = "uint8")
+ # find the colors within the specified boundaries and apply
+ # the mask
+ mask = cv2.inRange(image, lower, upper)
+ output = cv2.bitwise_and(image, image, mask = mask)
+ # show the images
+ cv2.imshow("images", np.hstack([image, output]))
+ cv2.waitKey(0) 
